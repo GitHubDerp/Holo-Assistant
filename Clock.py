@@ -91,7 +91,7 @@ def stopWatch():
 #Weckermenue
 def Main():
 	found = False
-	inputvar = input('\033[33m/Timer/StopUhr\033[0m\n')
+	inputvar = input('\033[33mTimer/StopUhr\033[0m\n')
 	for x in COMMANDS:
 		if inputvar == x:
 			found = True
