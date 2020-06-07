@@ -1,4 +1,5 @@
 #Imports
+from Matrix import Matrix
 from os import *
 from time import *
 import subprocess
@@ -9,7 +10,9 @@ from calendar import isleap
 timerdict = {}
 alarmdict = {}
 
-COMMANDS = ["back","help","alarm","timer","timerlist","timerdelete","stopwatch"]
+matrix = Matrix(10,10)
+
+COMMANDS = ["back","help","alarm","timer","timerlist","timerdelete","stopwatch","sw"]
 
 
 #Timespan calc.
@@ -35,6 +38,7 @@ def timerProcess(name):
 		print("Alarm ausgelöst: " + name)
 		timerdict[name].cancel()
 		timerdict.pop(name)
+		matrix.showAlarm()
 	else:
 		print('Error Timer nicht gefunden')
 
@@ -64,7 +68,10 @@ def stopWatch():
 	m = int(strftime("%M"))
 	s = int(strftime("%S"))
 
+	matrix.startStopwatchAnimation()
 	i = input('Stop?')
+	matrix.stopStopwatchAnimation()
+	
 	h2 = int(strftime("%I"))
 	m2 = int(strftime("%M"))
 	s2 = int(strftime("%S"))
@@ -78,7 +85,8 @@ def stopWatch():
 	hour 	= int(timespan / 3600)
 	print(hour , "Stunden" , minutes , "Minuten" , seconds, "Sekunden" )
 	
-		
+
+
 
 #Weckermenue
 def Main():
@@ -109,16 +117,16 @@ def Main():
 					#dailyAlarm(inputvarD, inputvarMo, inputvarY, inputvarH, inputvarM, inputvarN)
 			if inputvar == "timer": #timer
 				inputvarN = input('Name des Timers:\n')
-				inputvarH = int(input('HH:\n'))
-				inputvarM = int(input('MM:\n'))
-				inputvarS = int(input('SS:\n'))
+				inputvarH = int(input('HH: '))
+				inputvarM = int(input('MM: '))
+				inputvarS = int(input('SS: '))
 				timer(inputvarH,inputvarM,inputvarS,inputvarN)
 			if inputvar == "timerlist":#timerlist
 				printTimerList()
 			if inputvar == "timerdelete":#delettimer
 				inputvarN = input('Name des Timers:\n')
 				deletTimer(inputvarN)
-			if inputvar == "stopwatch":#stopuhr
+			if inputvar == "stopwatch" or inputvar == "sw":#stopuhr
 				stopWatch()
 			if inputvar == "back":#back
 				exit()

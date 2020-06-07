@@ -4,7 +4,7 @@ import random
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-import io
+
 
 
 # THESE ARE MOST LIKELY THE VALUES YOU WILL BE NEEDING
@@ -56,7 +56,6 @@ def textToImage(text):
 	img = Image.new('RGB', (10, 10))
 	d = ImageDraw.Draw(img)
 	d.text((0, 0), text, fill=(255, 255, 255), font=fnt7)
-	s = io.BytesIO()
 	img.save(f'images/{text}.bmp')
 	return img
 

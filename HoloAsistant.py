@@ -127,7 +127,7 @@ def getDate():
 
 #Clock
 def clock():
-	system("python3 " +"Clock.py")	
+	system("python3 Clock.py")	
 
 
 #Status Ausgabe
