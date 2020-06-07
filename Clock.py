@@ -64,7 +64,7 @@ def deletTimer(name):
 
 #Stopwatch 
 def stopWatch():
-	h = int(strftime("%I"))
+	h = int(strftime("%H"))
 	m = int(strftime("%M"))
 	s = int(strftime("%S"))
 
@@ -72,7 +72,7 @@ def stopWatch():
 	i = input('Stop?')
 	matrix.stopStopwatchAnimation()
 	
-	h2 = int(strftime("%I"))
+	h2 = int(strftime("%H"))
 	m2 = int(strftime("%M"))
 	s2 = int(strftime("%S"))
 

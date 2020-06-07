@@ -18,13 +18,13 @@ class Matrix:
         self.artnet = StupidArtnet(target_ip, universe, packet_size)
         self.packet = bytearray(packet_size)		# create packet for Artnet
         self.fnt7 = ImageFont.truetype('stupidArtnet/small_pixel.ttf', 7)
+        self.fnt8 = ImageFont.truetype('stupidArtnet/small_pixel.ttf', 8)
         self.stopwatchAnimator = None
 
     def sendImageToMatrix(self, img):
         for y in range(self.dimY):
             for x in range(self.dimX):
                 pixel = img.getpixel((x,y)) 
-                print(pixel, end='')
                 self.packet[y *3 * self.dimY + x*3]     = pixel[0] #R
                 self.packet[y *3 * self.dimY + x*3 + 1] = pixel[1] #G
                 self.packet[y *3 * self.dimY + x*3 + 2] = pixel[2] #B
@@ -34,7 +34,7 @@ class Matrix:
     def textToImage(self,text):
         img = Image.new('RGB', (self.dimX , self.dimY))
         d = ImageDraw.Draw(img)
-        d.text((0, 0), text, fill=(255, 255, 255), font= self.fnt7)
+        d.text((0, 1), text, fill=(255, 255, 255), font= self.fnt8)
         img.save(f'stupidArtnet/images/{text}.bmp')
         return img
 
@@ -115,11 +115,6 @@ class Matrix:
 
 
 
-
-    #img = textToImage("42")
-    #sendImageToMatrix(img) # send to Matrix
-    #showAlarm()
-        
     # hotfix lib error
     #artnet.start()
     #artnet.stop()

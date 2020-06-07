@@ -2,7 +2,8 @@
 from os import *
 import time
 import subprocess
-from _thread import start_new_thread
+from Matrix import Matrix
+#from _thread import start_new_thread
 
 
 #FarbCodes
@@ -24,6 +25,8 @@ NEWCOMMANDS = ["file","dir"]
 SYSTEMCOMMANDS = ["shutdown","down","status","new","delete","del","time","date","clock","help"]
 OPENCOMMANDS = ["firefox"]
 
+#Matrix
+matrix = Matrix(10,10)
 
 
 #Start
@@ -115,12 +118,44 @@ def logDelete(typ,path,betriebssystem):
 
 #Uhrzeit
 def getTime():
+	h = time.strftime("%H")
+	m = time.strftime("%M")
+	s = time.strftime("%S")
 	print("Es ist "+ time.strftime("%X"))
+	delay = 2
+	matrix.sendImageToMatrix(matrix.textToImage(h)) # send to Matrix
+	time.sleep(delay)
+
+	matrix.artnet.blackout()
+	matrix.sendImageToMatrix(matrix.textToImage(m))
+	time.sleep(delay)
+
+	matrix.artnet.blackout()
+	matrix.sendImageToMatrix(matrix.textToImage(s))
+	time.sleep(delay)
+	
+	matrix.artnet.blackout()
 	Main()
 
 #Datum
 def getDate():
+	d = time.strftime("%d")
+	m = time.strftime("%m")
+	y = (time.strftime("%Y"))[-2:]
 	print("Heute ist der "+ time.strftime("%d.%m.%Y"))
+	delay = 2
+	matrix.sendImageToMatrix(matrix.textToImage(d)) # send to Matrix
+	time.sleep(delay)
+
+	matrix.artnet.blackout()
+	matrix.sendImageToMatrix(matrix.textToImage(m))
+	time.sleep(delay)
+
+	matrix.artnet.blackout()
+	matrix.sendImageToMatrix(matrix.textToImage(y))
+	time.sleep(delay)
+
+	matrix.artnet.blackout()
 	Main()
 
 
