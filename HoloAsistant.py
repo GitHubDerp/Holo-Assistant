@@ -22,7 +22,7 @@ SYSTEMVERSION = "HoloAsistant 1.1"
 
 #Commands
 NEWCOMMANDS = ["Datei","Ordner"]
-SYSTEMCOMMANDS = ["shutdown","status","new","delet","time","date","uhr","execute","help","sudo","comit sudoku"]
+SYSTEMCOMMANDS = ["shutdown","status","new","delete","time","date","uhr","execute","help","sudo","comit sudoku"]
 OPENCOMMANDS = ["firefox"]
 
 
@@ -84,31 +84,31 @@ def newCommandParser():
 
 
 #DeletFile
-def deletFile(name):
+def deleteFile(name):
 	system('rm ' + name)
 	print(name," wurde entfernt")	
 	Main()
 
 #DeletOrdner
-def deletDir(name):
+def deleteDir(name):
 	system('rmdir ' + name)
 	print(name," wurde entfernt")	
 	Main()
 
 
-#CommandParser for "delet"
-def deletCommandParser():
+#CommandParser for "delete"
+def deleteCommandParser():
 	for x in NEWCOMMANDS:
 		print('\033[33m',x,'\033[0m')
 	inputvar = input('-')
 	if inputvar == "back":
 		Main()
-	if inputvar == NEWCOMMANDS[0]:#datei delet
+	if inputvar == NEWCOMMANDS[0]:#datei delete
 		inputName = input('\033[95mName\033[0m')		
-		deletFile(inputName)
-	if inputvar == NEWCOMMANDS[1]:#ordner delet
+		deleteFile(inputName)
+	if inputvar == NEWCOMMANDS[1]:#ordner delete
 		inputName= input('\033[95mName\033[0m')
-		deletDir(inputName)
+		deleteDir(inputName)
 
 
 
@@ -199,8 +199,8 @@ def Main():
 				statusRep()
 			if inputvar == SYSTEMCOMMANDS[2]:#new
 				newCommandParser()
-			if inputvar == SYSTEMCOMMANDS[3]:#delet
-				deletCommandParser()
+			if inputvar == SYSTEMCOMMANDS[3]:#delete
+				deleteCommandParser()
 			if inputvar == SYSTEMCOMMANDS[4]:#Time
 				getTime()
 			if inputvar == SYSTEMCOMMANDS[5]:#Date
