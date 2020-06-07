@@ -12,7 +12,7 @@ alarmdict = {}
 
 matrix = Matrix(10,10)
 
-COMMANDS = ["back","help","alarm","timer","timerlist","timerdelete","stopwatch","sw"]
+COMMANDS = ["back","help","timer","timerlist","timerdelete","stopwatch","sw"]
 
 
 #Timespan calc.
@@ -91,30 +91,10 @@ def stopWatch():
 #Weckermenue
 def Main():
 	found = False
-	inputvar = input('\033[33mWecker/Timer/StopUhr\033[0m\n')
+	inputvar = input('\033[33m/Timer/StopUhr\033[0m\n')
 	for x in COMMANDS:
 		if inputvar == x:
 			found = True
-			if inputvar == "alarm":#Wecker
-				inputvar = input('\033[33meinmal/Täglich/nach Wochentag\033[0m\n')
-				if inputvar == "einmal":
-					print("Noch nicht Verfügbar")
-					#inputvarN = input('Name des Alarms:\n')
-					#inputvarD = int(input('TT:\n'))
-					#inputvarMo = int(input('MM:\n'))
-					#inputvarY = int(input('jjjj:\n'))
-					#inputvarH = int(input('HH:\n'))
-					#inputvarM = int(input('MM:\n'))				
-					#oneAlarm(inputvarD, inputvarMo, inputvarJ, inputvarH, inputvarM, inputvarN)
-				if inputvar == "täglich":
-					print("Noch nicht Verfügbar")
-					#inputvarN = input('Name des Alarms:\n')
-					#inputvarD = int(input('TT:\n'))
-					#inputvarMo = int(input('MM:\n'))
-					#inputvarY = int(input('jjjj:\n'))
-					#inputvarH = int(input('HH:\n'))
-					#inputvarM = int(input('MM:\n'))
-					#dailyAlarm(inputvarD, inputvarMo, inputvarY, inputvarH, inputvarM, inputvarN)
 			if inputvar == "timer": #timer
 				inputvarN = input('Name des Timers:\n')
 				inputvarH = int(input('HH: '))
