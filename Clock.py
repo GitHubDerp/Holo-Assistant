@@ -9,33 +9,12 @@ from calendar import isleap
 timerdict = {}
 alarmdict = {}
 
-COMMANDS = ["back","help","wecker","timer","timerlist","delettimer","stopuhr"]
-
-#Wecker underconstruction!
-def oneAlarm(delteID,alarmTime):
-	while True and deletID:
-		if alarmTime == strftime("%X"):
-			system('echo "ALARM!!!"')
-		wait = False
-
-#Täglich Wecker undercosntruction!
-def dailyAlarm(day, month, year, hour, min , name ):
-	d = int(strftime("%d"))
-	mo = int(strftime("%m"))
-	y = int(strftime("%Y"))
-	h = int(strftime("%I"))
-	m = int(strftime("%M"))
-	s = int(strftime("%S"))
-	
-	
-	
+COMMANDS = ["back","help","alarm","timer","timerlist","timerdelete","stopwatch"]
 
 
-	inputvar = input('reuse y/n?')
-
-#Timeddpsn calc.
+#Timespan calc.
 def calcTimespan(h,m,s):
-	timespan = 0.0
+	timespan = 0
 	timespan = h*60*60
 	timespan = timespan + (m*60)
 	timespan = timespan + s
@@ -44,30 +23,36 @@ def calcTimespan(h,m,s):
 #Timmer
 def timer(h,m,s,name):
 	timespan = calcTimespan(h,m,s)
-	t = threading.Timer(timespan, timerProcess, [name])
-	t.start()
-	timerdict[name] = t
+	if timespan > 0:
+		t = threading.Timer(timespan, timerProcess, [name])
+		t.start()
+		timerdict[name] = t
+	else:
+		print("Ungültige Eingabe")	
 
 def timerProcess(name):
 	if name in timerdict:
-		print(name +"Alarm")
+		print("Alarm ausgelöst: " + name)
 		timerdict[name].cancel()
 		timerdict.pop(name)
 	else:
-		print('eror Timer nicht gefunden')
+		print('Error Timer nicht gefunden')
 
 #Timerlist
-def getTimerList():
-	for x in timerdict:
-		print(x)
+def printTimerList():
+	if timerdict:
+		for x in timerdict:
+			print(x)
+	else:
+		print("Kein Timer aktiv")
 
 
 #DeletTimer
 def deletTimer(name):
-	try:
-		timerdict.pop(name)	
+	if name in timerdict:
+		timerdict.pop(name)
 		print("Timer gelöscht")	
-	except:
+	else:	
 		print("Timer nicht gefunden")
 	
 
@@ -88,38 +73,21 @@ def stopWatch():
 	t2 = calcTimespan(h2,m2,s2)
 
 	timespan = t2 - t
-	time = timespan
-	min = 0
-	hour = 0
-	if timespan < 60:
-		time = timespan
-		block = True
-	else:
-		while time > 0:
-			time = time - 60
-			min = min + 1
-		if time < 0:
-			time = time + 60
-			min = min - 1
-	while min > 59:
-		min = min - 60
-		hour = hour + 1
-	if min < 59 and block == False:
-		min = min + 60
-		hour = hour - 1
-
-	print(hour , "Stunden" , min , "Minuten" , time, "Sekunden" )
+	seconds = timespan % 60
+	minutes = int((timespan % 3600) / 60)
+	hour 	= int(timespan / 3600)
+	print(hour , "Stunden" , minutes , "Minuten" , seconds, "Sekunden" )
 	
 		
 
 #Weckermenue
 def Main():
 	found = False
-	inputvar = input('\033[33mWecker/Timmer/StopUhr\033[0m\n')
+	inputvar = input('\033[33mWecker/Timer/StopUhr\033[0m\n')
 	for x in COMMANDS:
 		if inputvar == x:
 			found = True
-			if inputvar == COMMANDS[2]:#Wecker
+			if inputvar == "alarm":#Wecker
 				inputvar = input('\033[33meinmal/Täglich/nach Wochentag\033[0m\n')
 				if inputvar == "einmal":
 					print("Noch nicht Verfügbar")
@@ -139,22 +107,22 @@ def Main():
 					#inputvarH = int(input('HH:\n'))
 					#inputvarM = int(input('MM:\n'))
 					#dailyAlarm(inputvarD, inputvarMo, inputvarY, inputvarH, inputvarM, inputvarN)
-			if inputvar == COMMANDS[3]:#timer
-				inputvarN = input('Name des Timer:\n')
+			if inputvar == "timer": #timer
+				inputvarN = input('Name des Timers:\n')
 				inputvarH = int(input('HH:\n'))
 				inputvarM = int(input('MM:\n'))
 				inputvarS = int(input('SS:\n'))
 				timer(inputvarH,inputvarM,inputvarS,inputvarN)
-			if inputvar == COMMANDS[4]:#timerlist
-				getTimerList()
-			if inputvar == COMMANDS[5]:#delettimer
-				inputvarN = input('Name des Timer:\n')
+			if inputvar == "timerlist":#timerlist
+				printTimerList()
+			if inputvar == "timerdelete":#delettimer
+				inputvarN = input('Name des Timers:\n')
 				deletTimer(inputvarN)
-			if inputvar == COMMANDS[6]:#stopuhr
+			if inputvar == "stopwatch":#stopuhr
 				stopWatch()
-			if inputvar == COMMANDS[0]:#back
+			if inputvar == "back":#back
 				exit()
-			if inputvar == COMMANDS[1]:#help
+			if inputvar == "help":#help
 				for x in COMMANDS:
 					print('\033[33m'+ x +'\033[0m')
 	if found  == False:
