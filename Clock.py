@@ -42,6 +42,7 @@ def timerProcess(name):
 	else:
 		print('Error Timer nicht gefunden')
 
+
 #Timerlist
 def printTimerList():
 	if timerdict:

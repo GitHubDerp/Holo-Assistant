@@ -113,6 +113,32 @@ class Matrix:
         showAlarmThread = self.myAlarm(self, 255,0,0)
         showAlarmThread.start()
 
+    class StartAnimation (threading.Thread):
+        def __init__(self, matrix):
+            threading.Thread.__init__(self)
+            self.matrix = matrix
+            
+        def run(self):
+            g = 0
+            b = 0
+            for y in range(self.matrix.dimY):
+                for x in range(self.matrix.dimX):
+                    self.matrix.packet[y *3 * self.matrix.dimY + x*3]     = 0 #Red
+                    self.matrix.packet[y *3 * self.matrix.dimY + x*3 + 1] = g #Green
+                    self.matrix.packet[y *3 * self.matrix.dimY + x*3 + 2] = b #Blue
+                g += 25
+                b += 25
+                self.matrix.artnet.set(self.matrix.packet)
+                self.matrix.artnet.show()
+                time.sleep(0.5)
+            self.matrix.artnet.blackout()
+
+    def startStartupAnimation(self):
+        startAnimation = self.StartAnimation(self)
+        startAnimation.start()
+        startAnimation.join()
+        self.artnet.blackout()
+
 
 
     # hotfix lib error

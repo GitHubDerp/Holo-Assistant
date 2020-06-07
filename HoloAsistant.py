@@ -31,6 +31,7 @@ matrix = Matrix(10,10)
 
 #Start
 system('echo \033[92m"Holo Asistant ist gestarted"\033[0m')
+matrix.startStartupAnimation()
 
 
 
