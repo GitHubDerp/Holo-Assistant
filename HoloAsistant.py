@@ -17,8 +17,8 @@ ENDC = '\033[0m'
 #System Stats
 LICENSKEY = "none"
 IDELMODE = True
-LANGUAGE = "Deutsch"
-SYSTEMVERSION = "HoloAsistant 1,0"
+LANGUAGE = "German"
+SYSTEMVERSION = "HoloAsistant 1.1"
 
 #Commands
 NEWCOMMANDS = ["Datei","Ordner"]
