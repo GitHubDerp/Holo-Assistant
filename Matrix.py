@@ -9,7 +9,7 @@ import threading
 class Matrix:
     def __init__(self,dimX, dimY):
         # THESE ARE MOST LIKELY THE VALUES YOU WILL BE NEEDING
-        target_ip = '192.168.178.81'		# typically in 2.x or 10.x range
+        target_ip = '192.168.43.15'		# typically in 2.x or 10.x range
         universe = 0 					# see docs
         packet_size = dimX * dimY * 3	# it is not necessary to send whole universe
 
