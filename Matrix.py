@@ -35,7 +35,7 @@ class Matrix:
         img = Image.new('RGB', (self.dimX , self.dimY))
         d = ImageDraw.Draw(img)
         d.text((0, 1), text, fill=(255, 255, 255), font= self.fnt8)
-        img.save(f'stupidArtnet/images/{text}.bmp')
+        #img.save(f'stupidArtnet/images/{text}.bmp')
         return img
 
     def showColor(self,r,g,b):
